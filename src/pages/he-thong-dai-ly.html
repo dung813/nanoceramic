@@ -1,0 +1,30 @@
+<!--
+title: Hệ Thống Đại Lý - Nano Ceramic Window Films
+nav: dealer
+bodyClass: page page-dealer
+head: <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+scripts: https://unpkg.com/leaflet@1.9.4/dist/leaflet.js, assets/data/stores.js, assets/js/dealer.js
+-->
+  <main id="main">
+    <div class="container dealer-page">
+      <div class="localstore-wrap">
+        <div class="localstore-search">
+          <form class="localstore-form" onsubmit="return false">
+            <div class="keyword-box">
+              <input type="text" id="ls-keyword" placeholder="Nhập từ khoá tìm kiếm theo tên" aria-label="Từ khoá">
+              <button type="submit" class="ls-submit" aria-label="Tìm"><i class="icon-search"></i></button>
+            </div>
+            <div class="select-row">
+              <select id="ls-city" aria-label="Tỉnh/Thành phố"><option value="">Toàn Quốc</option></select>
+              <select id="ls-district" aria-label="Quận/Huyện"><option value="">Quận/Huyện</option></select>
+            </div>
+            <button type="button" class="find-near">Tìm kiếm cửa hàng gần bạn (&lt;=20km)</button>
+          </form>
+          <p class="ls-count"></p>
+          <div class="localstore-results" aria-live="polite"></div>
+        </div>
+        <div class="localstore-map"><div id="ls-map" aria-label="Bản đồ đại lý"></div></div>
+      </div>
+      <div class="is-divider dealer-divider"></div>
+    </div>
+  </main>

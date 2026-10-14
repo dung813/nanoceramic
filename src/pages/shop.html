@@ -1,0 +1,69 @@
+<!--
+title: Shop - Nano Ceramic Window Films
+nav: shop
+bodyClass: page page-shop
+scripts: assets/js/shop.js
+-->
+  <!-- ================= THANH TIÊU ĐỀ ================= -->
+  <div class="shop-page-title page-title featured-title dark">
+    <div class="page-title-inner container">
+      <div class="title-left">
+        <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="index.html">Trang chủ</a> <span class="divider">/</span> <span class="current-crumb">Shop</span></nav>
+        <button type="button" class="filter-button" aria-controls="shop-sidebar" aria-expanded="false"><span class="filter-icon" aria-hidden="true"></span> <strong>Lọc</strong></button>
+      </div>
+      <div class="title-right">
+        <select class="orderby" aria-label="Sắp xếp sản phẩm">
+          <option value="menu_order" selected>Sắp xếp mặc định</option>
+          <option value="price">Sắp xếp theo giá: thấp đến cao</option>
+          <option value="price-desc">Sắp xếp theo giá: cao đến thấp</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <main id="main" class="shop-main">
+    <div class="container">
+      <div class="products-grid" data-per-page="12">{{products}}
+      </div>
+      <p class="no-products" hidden>Không tìm thấy sản phẩm nào khớp với lựa chọn của bạn.</p>
+      <nav class="pagination" aria-label="Phân trang sản phẩm"></nav>
+    </div>
+  </main>
+
+  <!-- Sidebar lọc theo dòng phim (off-canvas trái) -->
+  <div class="mfp-bg shop-overlay"></div>
+  <aside id="shop-sidebar" class="shop-sidebar" aria-hidden="true">
+    <button class="sidebar-close" aria-label="Đóng">×</button>
+    <span class="widget-title">SERIES</span>
+    <div class="is-divider"></div>
+    <ul class="product-categories">
+      <li><a href="#" data-filter="">Tất cả</a></li>
+      <li><a href="#architectural" data-filter="architectural">ARCHITECTURAL</a></li>
+      <li><a href="#carbon-series" data-filter="carbon-series">CARBON SERIES</a></li>
+      <li><a href="#nano-series" data-filter="nano-series">NANO SERIES</a></li>
+      <li><a href="#titan-series" data-filter="titan-series">TITAN SERIES</a></li>
+    </ul>
+  </aside>
+
+  <!-- Hộp thoại Xem nhanh -->
+  <div class="quick-view-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="qv-title">
+    <div class="qv-backdrop"></div>
+    <div class="qv-box">
+      <button class="qv-close" aria-label="Đóng">×</button>
+      <div class="qv-image"><img src="" alt=""></div>
+      <div class="qv-info">
+        <p class="product-cat qv-cat"></p>
+        <h1 class="qv-title" id="qv-title"></h1>
+        <div class="is-divider"></div>
+        <div class="qv-price price"></div>
+        <p class="qv-desc"></p>
+        <div class="qv-variation">
+          <label for="qv-area">Diện tích</label>
+          <select id="qv-area"></select>
+          <p class="qv-var-price"></p>
+        </div>
+        <a href="tel:0774565888" class="button primary"><i class="icon-phone"></i> Liên hệ đặt hàng</a>
+        <a href="https://zalo.me/0774565888" target="_blank" rel="noopener" class="button secondary">Chat Zalo</a>
+      </div>
+    </div>
+  </div>

@@ -71,20 +71,24 @@
   document.addEventListener('click', function (e) { if (!searchWrap.contains(e.target)) closeSearch(); });
 
   /* ---------- Sliders (Flickity, cùng tuỳ chọn với trang gốc) ---------- */
+  function slider(selector, options) {
+    var el = document.querySelector(selector);
+    if (el && window.Flickity) new Flickity(el, options);
+  }
   if (window.Flickity) {
-    new Flickity('.hero-slider', {
+    slider('.hero-slider', {
       cellAlign: 'center', imagesLoaded: true, wrapAround: true, autoPlay: 6000,
       pauseAutoPlayOnHover: true, prevNextButtons: true, contain: true, adaptiveHeight: true,
       dragThreshold: 10, percentPosition: true, pageDots: true, draggable: true,
       selectedAttraction: 0.1, friction: 0.6
     });
 
-    new Flickity('.news-slider', {
+    slider('.news-slider', {
       cellAlign: 'left', imagesLoaded: true, groupCells: '100%', dragThreshold: 5,
       wrapAround: true, prevNextButtons: true, percentPosition: true, pageDots: false, autoPlay: false
     });
 
-    new Flickity('.press-slider', {
+    slider('.press-slider', {
       cellAlign: 'center', imagesLoaded: true, freeScroll: true, wrapAround: true, autoPlay: 4000,
       pauseAutoPlayOnHover: false, prevNextButtons: true, contain: true, adaptiveHeight: true,
       dragThreshold: 10, percentPosition: true, pageDots: false, draggable: true,
@@ -102,17 +106,98 @@
   });
 
   /* ---------- Hiệu ứng xuất hiện khi cuộn ---------- */
-  var reveals = document.querySelectorAll('.reveal');
+  var reveals = document.querySelectorAll('.reveal, .animate-up, .counter');
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
-        if (en.isIntersecting) { en.target.classList.add('in-view'); io.unobserve(en.target); }
+        if (!en.isIntersecting) return;
+        en.target.classList.add('in-view');
+        if (en.target.classList.contains('counter')) countUp(en.target);
+        io.unobserve(en.target);
       });
     }, { threshold: 0.15 });
     reveals.forEach(function (el) { io.observe(el); });
   } else {
     reveals.forEach(function (el) { el.classList.add('in-view'); });
   }
+
+  /* ---------- Đếm số (trang Về chúng tôi) ---------- */
+  function countUp(el) {
+    var end = parseInt(el.getAttribute('data-count'), 10);
+    var suffix = el.getAttribute('data-suffix') || '';
+    var start = null, dur = 1600;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    function step(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var v = Math.round(end * (1 - Math.pow(1 - p, 3)));
+      el.textContent = v.toLocaleString('vi-VN') + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  /* ---------- Parallax nền (section .has-parallax) ---------- */
+  var parallax = document.querySelectorAll('.has-parallax .section-bg img');
+  if (parallax.length && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    var ticking = false;
+    var updateParallax = function () {
+      parallax.forEach(function (img) {
+        var r = img.parentElement.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > window.innerHeight) return;
+        var offset = (r.top + r.height / 2 - window.innerHeight / 2) * -0.15;
+        img.style.transform = 'translate3d(0,' + offset.toFixed(1) + 'px,0) scale(1.15)';
+      });
+      ticking = false;
+    };
+    window.addEventListener('scroll', function () {
+      if (!ticking) { requestAnimationFrame(updateParallax); ticking = true; }
+    }, { passive: true });
+    updateParallax();
+  }
+
+  /* ---------- Nút "cuộn để xem thêm" (trang PPF) ---------- */
+  document.querySelectorAll('.scroll-for-more').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var next = btn.closest('section').nextElementSibling;
+      if (next) window.scrollTo({ top: next.getBoundingClientRect().top + window.pageYOffset - 70, behavior: 'smooth' });
+    });
+  });
+
+  /* ---------- Phân trang phía trình duyệt (danh sách bài viết) ---------- */
+  window.NanoPaginate = function (items, perPage, nav, onChange) {
+    var pages = Math.ceil(items.length / perPage);
+    function show(page, scroll) {
+      items.forEach(function (it, i) { it.hidden = i < (page - 1) * perPage || i >= page * perPage; });
+      nav.innerHTML = '';
+      if (pages > 1) {
+        for (var p = 1; p <= pages; p++) {
+          var b = document.createElement('button');
+          b.type = 'button';
+          b.textContent = p;
+          if (p === page) { b.className = 'current'; b.setAttribute('aria-current', 'page'); }
+          b.addEventListener('click', show.bind(null, p, true));
+          nav.appendChild(b);
+        }
+        if (page < pages) {
+          var next = document.createElement('button');
+          next.type = 'button';
+          next.setAttribute('aria-label', 'Tiếp theo');
+          next.innerHTML = '<i class="icon-angle-right"></i>';
+          next.addEventListener('click', show.bind(null, page + 1, true));
+          nav.appendChild(next);
+        }
+      }
+      if (scroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (onChange) onChange(page);
+    }
+    show(1, false);
+    return show;
+  };
+  document.querySelectorAll('.post-list[data-paginate]').forEach(function (list) {
+    var items = Array.prototype.slice.call(list.querySelectorAll('.post-item'));
+    window.NanoPaginate(items, parseInt(list.getAttribute('data-paginate'), 10), list.nextElementSibling);
+  });
 
   /* ---------- Cuộn mượt tới anchor, trừ chiều cao header dính ---------- */
   document.querySelectorAll('a[href^="#"]').forEach(function (a) {

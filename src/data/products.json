@@ -1,0 +1,410 @@
+[
+ {
+  "slug": "c05-carbon-series",
+  "name": "C05 – Carbon Series",
+  "cat": "CARBON SERIES",
+  "img": "assets/images/c05-300x300.webp",
+  "img2": "assets/images/hinh-san-pham-4-300x300.webp",
+  "prices": [
+   "165.750",
+   "195.000"
+  ],
+  "url": "https://nanoceramicfilms.com.vn/product/c05-carbon-series/",
+  "desc": "Dòng sản phẩm giá cực tốt dành cho ô tô, phù hợp cho kính lái với màu trong suốt ánh xanh sang trọng. Đơn giá tính trên 01 m². Vui lòng chọn khoảng diện tích theo nhu cầu phù hợp để có giá tốt nhất.",
+  "variations": [
+   {
+    "label": "<10m²",
+    "price": 195000
+   },
+   {
+    "label": "10-30m²",
+    "price": 175500
+   },
+   {
+    "label": "30-100m²",
+    "price": 165750
+   }
+  ],
+  "options": [
+   "<10m²",
+   "10-30m²",
+   "30-100m²",
+   ">100m²"
+  ]
+ },
+ {
+  "slug": "c15-carbon-series",
+  "name": "C15 – Carbon Series",
+  "cat": "CARBON SERIES",
+  "img": "assets/images/c15-300x300.webp",
+  "img2": "assets/images/hinh-san-pham-4-300x300.webp",
+  "prices": [
+   "165.750",
+   "195.000"
+  ],
+  "url": "https://nanoceramicfilms.com.vn/product/c15-carbon-series/",
+  "desc": "Dòng sản phẩm giá cực tốt dành cho ô tô, phù hợp cho kính lái với màu trong suốt ánh xanh sang trọng. Đơn giá tính trên 01 m². Vui lòng chọn khoảng diện tích theo nhu cầu phù hợp để có giá tốt nhất.",
+  "variations": [
+   {
+    "label": "<10m²",
+    "price": 195000
+   },
+   {
+    "label": "10-30m²",
+    "price": 175500
+   },
+   {
+    "label": "30-100m²",
+    "price": 165750
+   }
+  ],
+  "options": [
+   "<10m²",
+   "10-30m²",
+   "30-100m²",
+   ">100m²"
+  ]
+ },
+ {
+  "slug": "masterpiece-50-khien-chan-phan-xa-nhiet-the-he-moi-cho-kinh-lai-o-to",
+  "name": "MASTERPIECE 50 – “Khiên chắn phản xạ nhiệt” thế hệ mới cho kính lái ô tô",
+  "cat": "TITAN SERIES",
+  "img": "assets/images/nano-black-sputter-film-1-300x300.webp",
+  "img2": "assets/images/nano-black-sputter-film-2-300x300.webp",
+  "prices": [
+   "5.800.000"
+  ],
+  "url": "https://nanoceramicfilms.com.vn/product/masterpiece-50-khien-chan-phan-xa-nhiet-the-he-moi-cho-kinh-lai-o-to/",
+  "desc": ""
+ },
+ {
+  "slug": "n15-nano-series",
+  "name": "N15 – Nano Series",
+  "cat": "NANO SERIES",
+  "img": "assets/images/n15-300x300.webp",
+  "img2": "assets/images/hinh-san-pham-4-300x300.webp",
+  "prices": [
+   "382.500",
+   "450.000"
+  ],
+  "url": "https://nanoceramicfilms.com.vn/product/n15-nano-series/",
+  "desc": "Dòng sản phẩm cao cấp dành cho ô tô, phù hợp cho kính lái với màu trong suốt ánh xanh sang trọng. Đơn giá tính trên 01 m². Vui lòng chọn khoảng diện tích theo nhu cầu phù hợp để có giá tốt nhất.",
+  "variations": [
+   {
+    "label": "<10m²",
+    "price": 450000
+   },
+   {
+    "label": "10-30m²",
+    "price": 405000
+   },
+   {
+    "label": "30-100m²",
+    "price": 382500
+   }
+  ],
+  "options": [
+   "<10m²",
+   "10-30m²",
+   "30-100m²",
+   ">100m²"
+  ]
+ },
+ {
+  "slug": "n22-nano-series",
+  "name": "N22 – Nano Series",
+  "cat": "NANO SERIES",
+  "img": "assets/images/n22-300x300.webp",
+  "img2": "assets/images/hinh-san-pham-4-300x300.webp",
+  "prices": [
+   "382.500",
+   "450.000"
+  ],
+  "url": "https://nanoceramicfilms.com.vn/product/n22-nano-series/",
+  "desc": "Dòng sản phẩm cao cấp dành cho ô tô, phù hợp cho kính lái với màu trong suốt ánh xanh sang trọng. Đơn giá tính trên 01 m². Vui lòng chọn khoảng diện tích theo nhu cầu phù hợp để có giá tốt nhất.",
+  "variations": [
+   {
+    "label": "<10m²",
+    "price": 450000
+   },
+   {
+    "label": "10-30m²",
+    "price": 405000
+   },
+   {
+    "label": "30-100m²",
+    "price": 382500
+   }
+  ],
+  "options": [
+   "<10m²",
+   "10-30m²",
+   "30-100m²",
+   ">100m²"
+  ]
+ },
+ {
+  "slug": "n35-nano-series",
+  "name": "N35 – Nano Series",
+  "cat": "NANO SERIES",
+  "img": "assets/images/n35-300x300.webp",
+  "img2": "assets/images/hinh-san-pham-4-300x300.webp",
+  "prices": [
+   "382.500",
+   "450.000"
+  ],
+  "url": "https://nanoceramicfilms.com.vn/product/n35-nano-series/",
+  "desc": "Dòng sản phẩm cao cấp dành cho ô tô, phù hợp cho kính lái với màu trong suốt ánh xanh sang trọng. Đơn giá tính trên 01 m². Vui lòng chọn khoảng diện tích theo nhu cầu phù hợp để có giá tốt nhất.",
+  "variations": [
+   {
+    "label": "<10m²",
+    "price": 450000
+   },
+   {
+    "label": "10-30m²",
+    "price": 405000
+   },
+   {
+    "label": "30-100m²",
+    "price": 382500
+   }
+  ],
+  "options": [
+   "<10m²",
+   "10-30m²",
+   "30-100m²",
+   ">100m²"
+  ]
+ },
+ {
+  "slug": "n70-nano-series",
+  "name": "N70 – Nano Series",
+  "cat": "NANO SERIES",
+  "img": "assets/images/n70-300x300.webp",
+  "img2": "assets/images/hinh-san-pham-4-300x300.webp",
+  "prices": [
+   "510.000",
+   "600.000"
+  ],
+  "url": "https://nanoceramicfilms.com.vn/product/n70-nano-series/",
+  "desc": "Dòng sản phẩm cao cấp dành cho ô tô, phù hợp cho kính lái với màu trong suốt ánh xanh sang trọng. Đơn giá tính trên 01 m². Vui lòng chọn khoảng diện tích theo nhu cầu phù hợp để có giá tốt nhất.",
+  "variations": [
+   {
+    "label": "<10m²",
+    "price": 600000
+   },
+   {
+    "label": "10-30m²",
+    "price": 540000
+   },
+   {
+    "label": "30-100m²",
+    "price": 510000
+   }
+  ],
+  "options": [
+   "<10m²",
+   "10-30m²",
+   "30-100m²",
+   ">100m²"
+  ]
+ },
+ {
+  "slug": "silver-blue-15",
+  "name": "Silver Blue 15",
+  "cat": "ARCHITECTURAL",
+  "img": "assets/images/silver-blue-300x300.webp",
+  "img2": "assets/images/nacera-nha-va-xe-1-300x300.webp",
+  "prices": [
+   "238.000",
+   "280.000"
+  ],
+  "url": "https://nanoceramicfilms.com.vn/product/silver-blue-15/",
+  "desc": "Dòng sản phẩm giá cực tốt dành công trình. Đơn giá tính trên 01 m². Vui lòng chọn khoảng diện tích theo nhu cầu phù hợp để có giá tốt nhất.",
+  "variations": [
+   {
+    "label": "<10m²",
+    "price": 280000
+   },
+   {
+    "label": "10-30m²",
+    "price": 252000
+   },
+   {
+    "label": "30-100m²",
+    "price": 238000
+   }
+  ],
+  "options": [
+   "<10m²",
+   "10-30m²",
+   "30-100m²",
+   ">100m²"
+  ]
+ },
+ {
+  "slug": "silver-green-10",
+  "name": "Silver Green 10",
+  "cat": "ARCHITECTURAL",
+  "img": "assets/images/silver-green-300x300.webp",
+  "img2": "assets/images/nacera-nha-va-xe-1-300x300.webp",
+  "prices": [
+   "238.000",
+   "280.000"
+  ],
+  "url": "https://nanoceramicfilms.com.vn/product/silver-green-10/",
+  "desc": "Dòng sản phẩm giá cực tốt dành công trình. Đơn giá tính trên 01 m². Vui lòng chọn khoảng diện tích theo nhu cầu phù hợp để có giá tốt nhất.",
+  "variations": [
+   {
+    "label": "<10m²",
+    "price": 280000
+   },
+   {
+    "label": "10-30m²",
+    "price": 252000
+   },
+   {
+    "label": "30-100m²",
+    "price": 238000
+   }
+  ],
+  "options": [
+   "<10m²",
+   "10-30m²",
+   "30-100m²",
+   ">100m²"
+  ]
+ },
+ {
+  "slug": "silver-grey10",
+  "name": "Silver Grey 10",
+  "cat": "ARCHITECTURAL",
+  "img": "assets/images/silver-grey-300x300.webp",
+  "img2": "assets/images/nacera-nha-va-xe-1-300x300.webp",
+  "prices": [
+   "238.000",
+   "280.000"
+  ],
+  "url": "https://nanoceramicfilms.com.vn/product/silver-grey10/",
+  "desc": "Dòng sản phẩm giá cực tốt dành công trình. Đơn giá tính trên 01 m². Vui lòng chọn khoảng diện tích theo nhu cầu phù hợp để có giá tốt nhất.",
+  "variations": [
+   {
+    "label": "<10m²",
+    "price": 280000
+   },
+   {
+    "label": "10-30m²",
+    "price": 252000
+   },
+   {
+    "label": "30-100m²",
+    "price": 238000
+   }
+  ],
+  "options": [
+   "<10m²",
+   "10-30m²",
+   "30-100m²",
+   ">100m²"
+  ]
+ },
+ {
+  "slug": "x05-titan-series",
+  "name": "X05 – Titan Series",
+  "cat": "TITAN SERIES",
+  "img": "assets/images/x05-300x300.webp",
+  "img2": "assets/images/hinh-san-pham-4-300x300.webp",
+  "prices": [
+   "578.000",
+   "680.000"
+  ],
+  "url": "https://nanoceramicfilms.com.vn/product/x05-titan-series/",
+  "desc": "Dòng sản phẩm cao cấp nhất dành cho ô tô, phù hợp cho kính lái với màu trong suốt ánh xanh sang trọng. Đơn giá tính trên 01 m². Vui lòng chọn khoảng diện tích theo nhu cầu phù hợp để có giá tốt nhất.",
+  "variations": [
+   {
+    "label": "<10m²",
+    "price": 680000
+   },
+   {
+    "label": "10-30m²",
+    "price": 612000
+   },
+   {
+    "label": "30-100m²",
+    "price": 578000
+   }
+  ],
+  "options": [
+   "<10m²",
+   "10-30m²",
+   "30-100m²",
+   ">100m²"
+  ]
+ },
+ {
+  "slug": "x15-titan-series",
+  "name": "X15 – Titan Series",
+  "cat": "TITAN SERIES",
+  "img": "assets/images/x15-300x300.webp",
+  "img2": "assets/images/hinh-san-pham-4-300x300.webp",
+  "prices": [
+   "578.000",
+   "680.000"
+  ],
+  "url": "https://nanoceramicfilms.com.vn/product/x15-titan-series/",
+  "desc": "Dòng sản phẩm cao cấp nhất dành cho ô tô, phù hợp cho kính lái với màu trong suốt ánh xanh sang trọng. Đơn giá tính trên 01 m². Vui lòng chọn khoảng diện tích theo nhu cầu phù hợp để có giá tốt nhất.",
+  "variations": [
+   {
+    "label": "<10m²",
+    "price": 680000
+   },
+   {
+    "label": "10-30m²",
+    "price": 612000
+   },
+   {
+    "label": "30-100m²",
+    "price": 578000
+   }
+  ],
+  "options": [
+   "<10m²",
+   "10-30m²",
+   "30-100m²",
+   ">100m²"
+  ]
+ },
+ {
+  "slug": "x55-titan-series",
+  "name": "X55 – Titan Series",
+  "cat": "TITAN SERIES",
+  "img": "assets/images/x55-300x300.webp",
+  "img2": "assets/images/hinh-san-pham-4-300x300.webp",
+  "prices": [
+   "637.500",
+   "750.000"
+  ],
+  "url": "https://nanoceramicfilms.com.vn/product/x55-titan-series/",
+  "desc": "Dòng sản phẩm cao cấp nhất dành cho ô tô, phù hợp cho kính lái với màu trong suốt ánh xanh sang trọng. Đơn giá tính trên 01 m². Vui lòng chọn khoảng diện tích theo nhu cầu phù hợp để có giá tốt nhất.",
+  "variations": [
+   {
+    "label": "<10m²",
+    "price": 750000
+   },
+   {
+    "label": "10-30m²",
+    "price": 675000
+   },
+   {
+    "label": "30-100m²",
+    "price": 637500
+   }
+  ],
+  "options": [
+   "<10m²",
+   "10-30m²",
+   "30-100m²",
+   ">100m²"
+  ]
+ }
+]

@@ -2,29 +2,118 @@
 title: Hệ Thống Đại Lý - Nano Ceramic Window Films
 nav: dealer
 bodyClass: page page-dealer
-head: <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
-scripts: https://unpkg.com/leaflet@1.9.4/dist/leaflet.js, assets/data/stores.js, assets/js/dealer.js
+head: <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""><link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" crossorigin="">
+scripts: https://unpkg.com/leaflet@1.9.4/dist/leaflet.js, https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js, assets/data/stores.js, assets/js/dealer.js
 -->
-  <main id="main">
-    <div class="container dealer-page">
-      <div class="localstore-wrap">
-        <div class="localstore-search">
-          <form class="localstore-form" onsubmit="return false">
-            <div class="keyword-box">
-              <input type="text" id="ls-keyword" placeholder="Nhập từ khoá tìm kiếm theo tên" aria-label="Từ khoá">
-              <button type="submit" class="ls-submit" aria-label="Tìm"><i class="icon-search"></i></button>
-            </div>
-            <div class="select-row">
-              <select id="ls-city" aria-label="Tỉnh/Thành phố"><option value="">Toàn Quốc</option></select>
-              <select id="ls-district" aria-label="Quận/Huyện"><option value="">Quận/Huyện</option></select>
-            </div>
-            <button type="button" class="find-near">Tìm kiếm cửa hàng gần bạn (&lt;=20km)</button>
-          </form>
-          <p class="ls-count"></p>
-          <div class="localstore-results" aria-live="polite"></div>
+  <main id="main" class="dealer-main">
+    <h1 class="sr-only">Hệ thống đại lý Nano Ceramic Window Films</h1>
+    <div class="gmap" id="gmap">
+      <div id="gm-canvas" class="gm-canvas" aria-label="Bản đồ đại lý"></div>
+
+      <!-- Panel bên trái (desktop) / bottom sheet (mobile) -->
+      <aside class="gm-panel" aria-label="Danh sách đại lý">
+        <button class="gm-sheet-handle" type="button" aria-label="Mở rộng danh sách"><span></span></button>
+
+        <div class="gm-search">
+          <svg class="gm-search-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          <input type="search" id="gm-q" placeholder="Tìm đại lý Nano Ceramic" autocomplete="off" aria-label="Tìm đại lý theo tên hoặc địa chỉ">
+          <button type="button" class="gm-clear" aria-label="Xoá tìm kiếm" hidden><svg viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg></button>
         </div>
-        <div class="localstore-map"><div id="ls-map" aria-label="Bản đồ đại lý"></div></div>
+
+        <div class="gm-chips" role="toolbar" aria-label="Bộ lọc">
+          <button type="button" class="gm-chip gm-near" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm8.94 3A8.99 8.99 0 0 0 13 3.06V1h-2v2.06A8.99 8.99 0 0 0 3.06 11H1v2h2.06A8.99 8.99 0 0 0 11 20.94V23h2v-2.06A8.99 8.99 0 0 0 20.94 13H23v-2h-2.06zM12 19a7 7 0 1 1 0-14 7 7 0 0 1 0 14z"/></svg>
+            Gần tôi (20km)
+          </button>
+          <label class="gm-chip gm-select"><span class="sr-only">Tỉnh/Thành phố</span>
+            <select id="gm-city"><option value="">Toàn quốc</option></select>
+          </label>
+          <label class="gm-chip gm-select"><span class="sr-only">Quận/Huyện</span>
+            <select id="gm-district" disabled><option value="">Quận/Huyện</option></select>
+          </label>
+        </div>
+
+        <!-- Danh sách kết quả -->
+        <div class="gm-view gm-list-view">
+          <div class="gm-list-head"><span class="gm-count"></span></div>
+          <div class="gm-results" role="list"></div>
+        </div>
+
+        <!-- Chi tiết một đại lý -->
+        <div class="gm-view gm-detail-view" hidden>
+          <div class="gm-hero">
+            <button type="button" class="gm-back" aria-label="Quay lại danh sách"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></button>
+            <img src="assets/images/logo-nanoceramicfilms-white.webp" alt="" class="gm-hero-logo">
+            <span class="gm-hero-tag">Đại lý chính hãng</span>
+          </div>
+          <div class="gm-detail-body">
+            <h2 class="gm-name"></h2>
+            <p class="gm-type">Đại lý phim cách nhiệt · Nano Ceramic Window Films</p>
+
+            <div class="gm-actions">
+              <a class="gm-action gm-act-dir is-primary" target="_blank" rel="noopener">
+                <span class="gm-action-ico"><svg viewBox="0 0 24 24"><path d="M21.71 11.29l-9-9a.996.996 0 0 0-1.41 0l-9 9a.996.996 0 0 0 0 1.41l9 9c.39.39 1.02.39 1.41 0l9-9a.996.996 0 0 0 0-1.41zM14 14.5V12h-4v3H8v-4c0-.55.45-1 1-1h5V7.5l3.5 3.5-3.5 3.5z"/></svg></span>
+                <span>Chỉ đường</span>
+              </a>
+              <a class="gm-action gm-act-call">
+                <span class="gm-action-ico"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></span>
+                <span>Gọi</span>
+              </a>
+              <a class="gm-action gm-act-open" target="_blank" rel="noopener">
+                <span class="gm-action-ico"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg></span>
+                <span>Google Maps</span>
+              </a>
+              <button type="button" class="gm-action gm-act-share">
+                <span class="gm-action-ico"><svg viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11A2.99 2.99 0 0 0 21 5a3 3 0 1 0-5.91.7L8.04 9.81A2.99 2.99 0 0 0 3 12a3 3 0 0 0 5.04 2.19l7.12 4.16c-.05.21-.08.43-.08.65A2.92 2.92 0 1 0 18 16.08z"/></svg></span>
+                <span>Chia sẻ</span>
+              </button>
+            </div>
+
+            <ul class="gm-info">
+              <li class="gm-info-addr">
+                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 0 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+                <span class="gm-info-text"></span>
+                <button type="button" class="gm-copy" aria-label="Sao chép địa chỉ"><svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
+              </li>
+              <li class="gm-info-phone">
+                <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+                <a class="gm-info-text"></a>
+              </li>
+              <li class="gm-info-coord">
+                <svg viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm8.94 3A8.99 8.99 0 0 0 13 3.06V1h-2v2.06A8.99 8.99 0 0 0 3.06 11H1v2h2.06A8.99 8.99 0 0 0 11 20.94V23h2v-2.06A8.99 8.99 0 0 0 20.94 13H23v-2h-2.06zM12 19a7 7 0 1 1 0-14 7 7 0 0 1 0 14z"/></svg>
+                <span class="gm-info-text"></span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24"><path d="M12 1 3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                <span>Bảo hành điện tử chính hãng · <a href="https://ewarranty.nanoceramicfilms.com.vn/" target="_blank" rel="noopener">Tra cứu</a></span>
+              </li>
+              <li>
+                <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                <span>Hotline hỗ trợ: <a href="tel:0774565888">077 4565 888</a> (08:00 – 17:00)</span>
+              </li>
+            </ul>
+
+            <a class="gm-open-big" target="_blank" rel="noopener">Xem đại lý này trên Google Maps ↗
+            </a>
+          </div>
+        </div>
+      </aside>
+
+      <button type="button" class="gm-collapse" aria-label="Thu gọn bảng bên" aria-expanded="true"><svg viewBox="0 0 24 24"><path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+
+      <!-- Điều khiển bản đồ kiểu Google -->
+      <div class="gm-controls">
+        <button type="button" class="gm-ctrl gm-locate" aria-label="Vị trí của bạn"><svg viewBox="0 0 24 24"><path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm8.94 3A8.99 8.99 0 0 0 13 3.06V1h-2v2.06A8.99 8.99 0 0 0 3.06 11H1v2h2.06A8.99 8.99 0 0 0 11 20.94V23h2v-2.06A8.99 8.99 0 0 0 20.94 13H23v-2h-2.06zM12 19a7 7 0 1 1 0-14 7 7 0 0 1 0 14z"/></svg></button>
+        <div class="gm-zoom">
+          <button type="button" class="gm-ctrl gm-zoom-in" aria-label="Phóng to"><svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg></button>
+          <button type="button" class="gm-ctrl gm-zoom-out" aria-label="Thu nhỏ"><svg viewBox="0 0 24 24"><path d="M19 13H5v-2h14v2z"/></svg></button>
+        </div>
       </div>
-      <div class="is-divider dealer-divider"></div>
+      <button type="button" class="gm-layer" aria-label="Đổi lớp bản đồ">
+        <span class="gm-layer-thumb"></span>
+        <span class="gm-layer-label">Vệ tinh</span>
+      </button>
+
+      <div class="gm-toast" role="status" aria-live="polite"></div>
     </div>
   </main>

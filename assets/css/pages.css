@@ -23,6 +23,86 @@
 @keyframes heroUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
 @media (max-width: 549px) { .page-hero { min-height: 500px; } }
 
+/* ============================ PHIM CÁCH NHIỆT Ô TÔ ============================ */
+.auto-film-hero { min-height: 620px; }
+.auto-film-hero .section-bg-overlay { background: linear-gradient(90deg, rgba(28,10,37,.76), rgba(28,10,37,.18)); }
+.auto-film-hero .hero-inner { max-width: 850px; }
+.auto-film-eyebrow, .auto-film-kicker { color: var(--secondary); font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
+.auto-film-hero .auto-film-eyebrow { color: #fff; margin-bottom: .8em; }
+.auto-film-title { color: #fff; font-size: clamp(2.1rem, 5vw, 4.2rem); line-height: 1.05; margin-bottom: .35em; }
+.auto-film-hero .hero-inner > p:not(.auto-film-eyebrow) { color: #fff; font-size: 1.15rem; }
+.auto-film-intro { padding: 75px 0 55px; }
+.auto-film-intro .section-heading { margin: .2em 0 .5em; }
+.auto-film-intro .narrow > p:last-child { font-size: 1.1rem; }
+.auto-film-benefits { padding: 20px 0 80px; }
+.auto-film-benefit-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.auto-film-benefit { padding: 34px; border: 1px solid #e8e4eb; border-radius: 12px; background: #fff; box-shadow: 0 12px 30px rgba(30, 15, 40, .06); }
+.auto-film-benefit-icon { display: inline-grid; place-items: center; width: 48px; height: 48px; margin-bottom: 16px; border-radius: 50%; background: var(--primary); color: #fff; font-weight: 700; }
+.auto-film-benefit h2 { color: #421558; font-size: 1.45rem; }
+.auto-film-benefit p { margin-bottom: 0; }
+.auto-film-warranty { padding: 54px 0; background: #f6f4f7; }
+.auto-film-warranty-inner { display: flex; justify-content: space-between; align-items: center; gap: 30px; }
+.auto-film-warranty-inner h2, .auto-film-contact h2 { color: #421558; font-size: 2rem; }
+.auto-film-warranty-inner p { max-width: 760px; margin-bottom: 0; }
+.auto-film-pricing { padding: 75px 0 20px; background: #fff; }
+.auto-price-section { padding: 12px 0 38px; scroll-margin-top: 24px; }
+.auto-price-section .pricing-title { margin-bottom: 24px; font-size: 1.8rem; }
+.auto-pricing-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
+.auto-price-card { display: flex; flex-direction: column; overflow: hidden; border: 1px solid #e4e0e7; border-radius: 10px; background: #fff; box-shadow: 0 8px 24px rgba(30, 15, 40, .06); }
+.auto-price-head { padding: 18px 20px 14px; background: var(--primary); color: #fff; text-align: center; }
+.auto-price-head h3 { margin: 0; color: #fff; font-size: 1.2rem; }
+.auto-price-head p { margin: 6px 0 0; color: #fff; font-size: 1.55rem; font-weight: 700; }
+.auto-price-details { flex: 1; padding: 8px 18px; }
+.auto-price-detail { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 10px; padding: 12px 0; border-bottom: 1px solid #ece9ee; }
+.auto-price-detail > span:first-child { font-weight: 700; }
+.auto-price-film { grid-column: 1; color: #777; font-size: .86rem; }
+.auto-price-detail strong { grid-column: 2; grid-row: 1 / span 2; align-self: center; white-space: nowrap; }
+.auto-price-card > .button { align-self: center; margin: 8px 18px 18px; }
+.auto-price-note { text-align: center; }
+.auto-price-table-wrap { overflow-x: auto; margin: 22px 0; }
+.auto-price-table { width: 100%; border-collapse: collapse; background: #fff; }
+.auto-price-table th, .auto-price-table td { padding: 13px 16px; border: 1px solid #e6e2e8; text-align: left; }
+.auto-price-table th { background: var(--primary); color: #fff; }
+.auto-price-table tbody tr:nth-child(even) { background: #f8f6f9; }
+.auto-film-contact { padding: 70px 0; background: #f6f4f7; }
+.auto-film-contact p:not(.auto-film-kicker) { margin-bottom: 20px; }
+.booking-dialog { width: min(720px, calc(100% - 28px)); max-height: min(90vh, 900px); padding: 28px; border: 0; border-radius: 14px; color: #333; box-shadow: 0 20px 70px rgba(0,0,0,.3); }
+.booking-dialog::backdrop { background: rgba(20,12,24,.68); }
+.booking-dialog-head { display: flex; justify-content: space-between; gap: 20px; margin-bottom: 20px; }
+.booking-dialog-head .auto-film-kicker { margin-bottom: 5px; font-size: .75rem; }
+.booking-dialog-head h2 { margin: 0 0 5px; color: #421558; font-size: 1.7rem; }
+.booking-dialog-head p:last-child { margin: 0; }
+.booking-close { flex: 0 0 38px; align-self: flex-start; border: 0; border-radius: 50%; background: #f1edf3; color: #421558; font-size: 28px; line-height: 1; }
+.booking-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.booking-fields label { display: block; margin: 0; color: #444; font-size: .92rem; font-weight: 700; }
+.booking-fields label > span { color: #b42318; }
+.booking-fields input, .booking-fields select, .booking-fields textarea { display: block; width: 100%; min-height: 44px; margin-top: 5px; padding: 9px 11px; border: 1px solid #d6d0da; border-radius: 6px; background: #fff; color: #333; font: inherit; }
+.booking-fields textarea { resize: vertical; }
+.booking-note { grid-column: 1 / -1; }
+.booking-status { margin: 16px 0 0; padding: 12px 14px; border-radius: 6px; }
+.booking-status.is-error { background: #fff1f0; color: #9f1d16; }
+.booking-status.is-success { background: #effaf1; color: #176b31; }
+.booking-status.is-pending { background: #f2eef5; color: #421558; }
+.booking-actions { margin-top: 18px; text-align: center; }
+.booking-actions .button { margin-bottom: 8px; }
+.booking-actions p { margin: 0; font-size: .9rem; }
+.booking-actions p a { font-weight: 700; }
+.booking-actions button:disabled { opacity: .65; cursor: wait; }
+@media (max-width: 849px) {
+  .auto-film-hero { min-height: 540px; }
+  .auto-pricing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 549px) {
+  .auto-film-benefit-grid, .auto-pricing-grid { grid-template-columns: 1fr; }
+  .auto-film-benefit { padding: 26px; }
+  .auto-film-warranty-inner { align-items: flex-start; flex-direction: column; }
+  .auto-price-section .pricing-title { font-size: 1.45rem; }
+  .auto-price-table { min-width: 620px; }
+  .booking-dialog { padding: 20px; }
+  .booking-fields { grid-template-columns: 1fr; gap: 12px; }
+  .booking-note { grid-column: auto; }
+}
+
 /* Ảnh tỉ lệ cố định, phóng nhẹ khi rê chuột */
 .ratio-banner, .image-zoom { position: relative; overflow: hidden; }
 .ratio-banner { padding-top: 300px; }
@@ -420,6 +500,7 @@
 @media (max-width: 549px) { .contact-intro h2 { font-size: 2.2em; } }
 .offices-wrap { position: relative; margin-top: -150px; max-width: 1020px; }
 .office-box { background: #fff; padding: 0 0 20px; transition: box-shadow .3s; }
+.offices-wrap .office-box { max-width: 500px; margin: 0 auto; }
 .office-box:hover { box-shadow: 0 10px 20px rgb(0 0 0 / .1); }
 .office-image { padding-top: 70%; }
 .office-box .box-text { padding: 20px 10px 0; }
@@ -429,7 +510,6 @@
 .contact-direct .col { padding: 30px 30px 0; }
 .contact-direct h3 { font-size: 1.6em; color: #555; }
 .contact-direct p { font-size: 1.2rem; }
-.vn-map { width: 86%; }
 .social-circles { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
 .social-circles a {
   width: 2.5em; height: 2.5em; border-radius: 50%; background: var(--primary); color: #fff; display: inline-flex; align-items: center; justify-content: center;

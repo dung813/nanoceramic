@@ -356,10 +356,9 @@ i[class^="icon-"], i[class*=" icon-"] { font-family: "fl-icons" !important; font
 .section-products .icon-box p { font-size: 1rem; }
 .section-products .icon-box h5 { font-size: 1.05em; color: #555; }
 
-/* Ô tô / Nhà kính */
+/* Ô tô */
 .section-car { background: rgb(193,193,193); border-top: 1px solid #ececec; border-bottom: 1px solid #ececec; }
-.section-car::before, .section-house::before { content: ""; position: absolute; inset: 0; background: rgba(255,255,255,.85); }
-.section-house { background: #fff; }
+.section-car::before { content: ""; position: absolute; inset: 0; background: rgba(255,255,255,.85); }
 .section-split .container { position: relative; }
 .section-split h2 { font-size: 2em; color: #555; }
 .section-split .col { padding-bottom: 30px; }

@@ -7,7 +7,7 @@
  * <!--
  * title: Tiêu đề trang
  * description: Mô tả (tuỳ chọn)
- * nav: home | about | shop | ppf | dealer | project | news | contact
+ * nav: home | about | shop | ppf | project | news | contact
  * bodyClass: lớp cho <body> (tuỳ chọn)
  * head: thẻ thêm vào <head> (tuỳ chọn, 1 dòng)
  * scripts: các file js thêm, cách nhau bởi dấu phẩy (tuỳ chọn)
@@ -23,7 +23,7 @@ const footer = fs.readFileSync(path.join(SRC, 'partials/footer.html'), 'utf8');
 const DEFAULT_DESC = 'Nano Ceramic Window Films - Phim cách nhiệt thế hệ mới từ Hàn Quốc, phim chất lượng cao với mức giá phù hợp';
 
 function parsePage(src) {
-  const m = src.match(/^<!--\n([\s\S]*?)\n-->\n/);
+  const m = src.match(/^<!--\r?\n([\s\S]*?)\r?\n-->\r?\n/);
   const meta = {};
   if (m) {
     m[1].split('\n').forEach(line => {
@@ -48,6 +48,7 @@ function markActive(html, nav) {
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const posts = JSON.parse(fs.readFileSync(path.join(SRC, 'data/posts.json'), 'utf8'));
 const products = JSON.parse(fs.readFileSync(path.join(SRC, 'data/products.json'), 'utf8'));
+const carFilmPricing = JSON.parse(fs.readFileSync(path.join(SRC, 'data/car-film-pricing.json'), 'utf8'));
 
 // Danh sách bài viết dạng thẻ ngang (blog archive của Flatsome); 10 bài/trang do JS phân trang
 function renderPosts(key) {
@@ -104,10 +105,52 @@ function renderProducts() {
   }).join('');
 }
 
+function renderCarFilmPricing() {
+  const vehicleSections = carFilmPricing.vehicles.map(vehicle => {
+    const cards = vehicle.packages.map(pkg => {
+      const details = pkg.items.map(([position, film, price]) => `
+                <div class="auto-price-detail">
+                  <span>${esc(position)}</span><span class="auto-price-film">${esc(film)}</span><strong>${esc(price)}</strong>
+                </div>`).join('');
+      return `
+            <article class="auto-price-card">
+              <header class="auto-price-head">
+                <h3>${esc(pkg.name)}</h3>
+                <p>${esc(pkg.total)}</p>
+              </header>
+              <div class="auto-price-details">${details}</div>
+              <a href="#booking-form" class="button primary" data-booking-trigger data-booking-service="Phim cách nhiệt ô tô" data-booking-package="${esc(pkg.name)}" data-booking-vehicle="${esc(vehicle.name)}">Đặt lịch dán</a>
+            </article>`;
+    }).join('');
+    return `
+        <section class="auto-price-section">
+          <h2 class="pricing-title">BẢNG GIÁ XE ${esc(vehicle.name)}</h2>
+          <div class="auto-pricing-grid">${cards}
+          </div>
+        </section>`;
+  }).join('');
+  const rows = carFilmPricing.largeVehicles.map(([film, packages, price, positions]) => `
+              <tr><td>${esc(film)}</td><td>${esc(packages)}</td><td>${esc(price)}</td><td>${esc(positions)}</td></tr>`).join('');
+  return `${vehicleSections}
+        <section class="auto-price-section">
+          <h2 class="pricing-title">BẢNG GIÁ XE 29+ CHỖ</h2>
+          <p class="auto-price-note">Giá gói dán được tính theo mã phim và diện tích kính thực tế.</p>
+          <div class="auto-price-table-wrap">
+            <table class="auto-price-table">
+              <thead><tr><th>Mã phim</th><th>Gói dán</th><th>Giá</th><th>Vị trí dán phù hợp</th></tr></thead>
+              <tbody>${rows}
+              </tbody>
+            </table>
+          </div>
+          <div class="text-center"><a href="#booking-form" class="button primary" data-booking-trigger data-booking-service="Phim cách nhiệt ô tô" data-booking-vehicle="Xe 29+ chỗ">Đặt lịch dán</a></div>
+        </section>`;
+}
+
 function renderBlocks(body) {
   return body
     .replace(/\{\{posts:([\w-]+)\}\}/g, (_, k) => renderPosts(k))
-    .replace(/\{\{products\}\}/g, () => renderProducts());
+    .replace(/\{\{products\}\}/g, () => renderProducts())
+    .replace(/\{\{carFilmPricing\}\}/g, () => renderCarFilmPricing());
 }
 
 const pages = fs.readdirSync(path.join(SRC, 'pages')).filter(f => f.endsWith('.html'));

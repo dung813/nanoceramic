@@ -486,6 +486,8 @@ i[class^="icon-"], i[class*=" icon-"] { font-family: "fl-icons" !important; font
 
 /* Phục vụ */
 .section-serve { padding: 0; background: #fff; }
+.section-serve .row { max-width: 1400px; margin: 0 auto; }
+.serve-image { display: block; width: 100%; max-height: 620px; object-fit: contain; margin: 0 auto; }
 .serve-banner { position: relative; height: 500px; overflow: hidden; }
 .serve-banner img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
 .serve-banner:hover img { transform: scale(1.05); }
@@ -494,6 +496,7 @@ i[class^="icon-"], i[class*=" icon-"] { font-family: "fl-icons" !important; font
 .serve-btn { padding: 7px 30px; margin: 0; }
 @media (max-width: 849px) { .serve-text { padding: 70px 100px 50px !important; } }
 @media (max-width: 549px) {
+  .serve-image { max-height: 420px; }
   .serve-banner { height: auto; padding-top: 75%; }
   .serve-text { padding: 50px 40px 40px !important; }
 }

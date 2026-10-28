@@ -492,6 +492,17 @@
   .archive-post { flex-direction: column; }
   .archive-post .box-image { width: 100%; padding-top: 56%; }
 }
+.article-page { padding: 32px 0 56px; }
+.article-content { max-width: 860px; }
+.article-breadcrumb { display: flex; gap: 10px; align-items: center; margin-bottom: 24px; font-size: .9em; }
+.article-header h1 { margin-bottom: 10px; color: #444; }
+.article-date { margin-bottom: 18px; color: #777; }
+.article-intro { font-size: 1.15em; line-height: 1.8; color: #555; }
+.article-image { display: block; width: 100%; max-height: 520px; object-fit: cover; margin: 24px auto 32px; }
+.article-body { max-width: 760px; margin: 0 auto; font-size: 1.05em; line-height: 1.85; }
+.article-body h2 { margin: 30px 0 12px; color: #444; font-size: 1.45em; }
+.article-body p { margin-bottom: 16px; }
+.article-back { display: inline-block; margin: 28px 0 0; }
 
 /* ============================ LIÊN HỆ ============================ */
 .contact-hero { padding: 100px 0 160px; background: rgb(237,236,232); }

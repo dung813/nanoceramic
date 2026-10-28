@@ -47,6 +47,7 @@ function markActive(html, nav) {
 /* ---------- Khối nội dung sinh từ dữ liệu ---------- */
 const esc = s => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const posts = JSON.parse(fs.readFileSync(path.join(SRC, 'data/posts.json'), 'utf8'));
+const articles = JSON.parse(fs.readFileSync(path.join(SRC, 'data/articles.json'), 'utf8'));
 const products = JSON.parse(fs.readFileSync(path.join(SRC, 'data/products.json'), 'utf8'));
 const carFilmPricing = JSON.parse(fs.readFileSync(path.join(SRC, 'data/car-film-pricing.json'), 'utf8'));
 
@@ -54,7 +55,8 @@ const carFilmPricing = JSON.parse(fs.readFileSync(path.join(SRC, 'data/car-film-
 function renderPosts(key) {
   const list = posts[key] || [];
   const items = list.map(p => {
-    const link = `href="${esc(p.url)}" target="_blank" rel="noopener"`;
+    const isLocalArticle = Object.prototype.hasOwnProperty.call(articles, path.basename(p.url));
+    const link = isLocalArticle ? `href="${esc(p.url)}"` : `href="${esc(p.url)}" target="_blank" rel="noopener"`;
     const image = p.img ? `
           <a ${link} class="box-image" aria-label="${esc(p.title)}"><img src="${esc(p.img)}" alt="" loading="lazy"></a>` : '';
     const badge = p.img && p.day ? `
@@ -153,6 +155,10 @@ function renderBlocks(body) {
     .replace(/\{\{carFilmPricing\}\}/g, () => renderCarFilmPricing());
 }
 
+function fillTemplate(template, vars) {
+  return template.replace(/\{\{(\w+)\}\}/g, (_, key) => vars[key] ?? '');
+}
+
 const pages = fs.readdirSync(path.join(SRC, 'pages')).filter(f => f.endsWith('.html'));
 for (const file of pages) {
   const { meta, body } = parsePage(fs.readFileSync(path.join(SRC, 'pages', file), 'utf8'));
@@ -165,8 +171,49 @@ for (const file of pages) {
     head: meta.head ? '\n' + meta.head : '',
     scripts
   };
-  const fill = s => s.replace(/\{\{(\w+)\}\}/g, (_, k) => vars[k] ?? '');
-  const html = markActive(fill(header), meta.nav) + renderBlocks(body) + markActive(fill(footer), meta.nav);
+  const html = markActive(fillTemplate(header, vars), meta.nav) + renderBlocks(body) + markActive(fillTemplate(footer, vars), meta.nav);
+  fs.writeFileSync(path.join(ROOT, file), html);
+  console.log('✓', file);
+}
+
+for (const post of posts['tin-tuc'] || []) {
+  const file = path.basename(post.url);
+  const article = articles[file];
+  if (!article) throw new Error(`Missing article content for ${file}`);
+
+  const sections = article.sections.map(section => `
+          <section>
+            <h2>${esc(section.heading)}</h2>
+            ${section.paragraphs.map(paragraph => `<p>${esc(paragraph)}</p>`).join('\n            ')}
+          </section>`).join('');
+  const date = post.date || (post.day && post.month ? `${post.day} ${post.month}` : '');
+  const image = post.img
+    ? `<img class="article-image" src="${esc(post.img)}" alt="${esc(post.title)}">`
+    : '';
+  const body = `
+  <main id="main" class="article-page">
+    <article class="container article-content">
+      <nav class="article-breadcrumb" aria-label="Điều hướng">
+        <a href="index.html">Trang chủ</a><span aria-hidden="true">/</span><a href="tin-tuc.html">Tin tức</a>
+      </nav>
+      <header class="article-header">
+        <h1>${esc(post.title)}</h1>
+        ${date ? `<p class="article-date">${esc(date)}</p>` : ''}
+        <p class="article-intro">${esc(article.intro)}</p>
+      </header>
+      ${image}
+      <div class="article-body">${sections}</div>
+      <a href="tin-tuc.html" class="button primary article-back">Quay lại Tin tức</a>
+    </article>
+  </main>`;
+  const vars = {
+    title: `${post.title} - Nano Ceramic Window Films`,
+    description: article.intro,
+    bodyClass: 'page page-single-article',
+    head: '',
+    scripts: ''
+  };
+  const html = markActive(fillTemplate(header, vars), 'news') + body + markActive(fillTemplate(footer, vars), 'news');
   fs.writeFileSync(path.join(ROOT, file), html);
   console.log('✓', file);
 }

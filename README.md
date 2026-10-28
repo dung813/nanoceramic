@@ -27,7 +27,15 @@ node build.js
 
 (Chỉ cần Node.js, không cần cài thư viện.)
 
-Form đặt lịch được mở từ các nút đặt lịch ở trang chủ, PPF và trang phim ô tô. Để nhận yêu cầu, cấu hình URL API POST trong thuộc tính `data-endpoint` của form `#booking-form` ở `src/partials/footer.html`. API nhận JSON gồm `name`, `phone`, `service`, `package`, `vehicle`, `vehicleType`, `branch`, `date`, `time` và `note`. Khi chưa cấu hình API, form sẽ thông báo chưa gửi dữ liệu và cung cấp số điện thoại hỗ trợ.
+Form đặt lịch được mở từ các nút đặt lịch ở trang chủ, PPF và trang phim ô tô. Mã Google Apps Script nằm trong `apps-script/Code.gs`; script tạo sheet `Lịch đặt hẹn`, kiểm tra dữ liệu, ghi thời gian nhận và mã yêu cầu, đồng thời chống ghi trùng khi khách gửi lại cùng một yêu cầu.
+
+Để kết nối Google Sheet:
+1. Mở sheet, đăng nhập tài khoản Google có quyền chỉnh sửa, chọn **Tiện ích mở rộng > Apps Script**.
+2. Thay nội dung `Code.gs` bằng mã trong `apps-script/Code.gs`, lưu rồi chạy `setupBookingSheet` một lần và cấp quyền truy cập sheet.
+3. Chọn **Triển khai > Bản triển khai mới > Ứng dụng web**; đặt **Thực thi với tư cách** là tài khoản của bạn và quyền truy cập là **Bất kỳ ai** để khách có thể gửi yêu cầu mà không cần đăng nhập. Sao chép URL ứng dụng web kết thúc bằng `/exec`.
+4. Điền URL triển khai vào `data-endpoint` của form `#booking-form` trong `src/partials/footer.html` (endpoint hiện tại đã được cấu hình), chạy `node build.js`, rồi gửi một yêu cầu thử để xác nhận hàng mới xuất hiện trong sheet.
+
+Sheet được cung cấp hiện yêu cầu đăng nhập Google để chỉnh sửa, nên cần chủ sở hữu đăng nhập và cấp quyền khi cài đặt/triển khai. Không đưa thông tin đăng nhập hoặc khóa bí mật Google vào mã website. Khi chưa có URL triển khai `/exec`, form vẫn báo chưa kết nối và không thông báo gửi thành công.
 
 ## Các trang
 

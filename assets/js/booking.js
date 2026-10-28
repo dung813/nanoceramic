@@ -31,11 +31,22 @@
     status.classList.toggle('is-pending', state === 'pending');
   }
 
+  function createRequestId() {
+    if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+      return window.crypto.randomUUID();
+    }
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (char) {
+      var random = Math.random() * 16 | 0;
+      return (char === 'x' ? random : (random & 3 | 8)).toString(16);
+    });
+  }
+
   document.addEventListener('click', function (event) {
     var trigger = event.target.closest('[data-booking-trigger]');
     if (trigger) {
       event.preventDefault();
       form.reset();
+      delete form.dataset.requestId;
       status.hidden = true;
       status.textContent = '';
       service.value = trigger.dataset.bookingService || '';
@@ -68,18 +79,28 @@
     }
 
     var payload = Object.fromEntries(new FormData(form).entries());
+    form.dataset.requestId = form.dataset.requestId || createRequestId();
+    payload.requestId = form.dataset.requestId;
     var submitButton = form.querySelector('[type="submit"]');
     submitButton.disabled = true;
     showStatus('Đang gửi yêu cầu đặt lịch...', 'pending');
 
     fetch(endpoint, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
       body: JSON.stringify(payload)
     }).then(function (response) {
       if (!response.ok) throw new Error('Máy chủ phản hồi HTTP ' + response.status + '.');
-      showStatus('Đã gửi yêu cầu đặt lịch. Chúng tôi sẽ liên hệ xác nhận với bạn.', 'success');
+      return response.json();
+    }).then(function (result) {
+      if (!result || result.ok !== true) {
+        throw new Error(result && result.error ? result.error : 'Máy chủ chưa xác nhận đã lưu yêu cầu.');
+      }
+      showStatus(result.duplicate
+        ? 'Yêu cầu này đã được ghi nhận trước đó. Chúng tôi sẽ liên hệ xác nhận với bạn.'
+        : 'Đã gửi yêu cầu đặt lịch. Chúng tôi sẽ liên hệ xác nhận với bạn.', 'success');
       form.reset();
+      delete form.dataset.requestId;
       dateInput.min = today;
     }).catch(function (error) {
       showStatus('Không gửi được yêu cầu đặt lịch. ' + error.message + ' Vui lòng thử lại hoặc gọi 0913 047 775.', 'error');
